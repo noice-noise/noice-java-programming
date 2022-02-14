@@ -1,0 +1,108 @@
+package Lab19;
+
+import Lab17.MyBinTree;
+import Lab17.Node;
+import Lab17.Position;
+import Lab18.Entry;
+import Lab18.MyBST;
+
+public class MyAVL<K, V> extends MyBST<K, V> {
+    /**
+     * Returns the height of the node.
+     * @param pos the node to be evaluated.
+     * @return the height of pos.
+     */
+    private int getHeight(Position<Entry<K, V>> pos) {
+
+        if (pos == null || pos.getElement() == null){
+            return 0;
+            // throw new IllegalArgumentException("Position argument invalid.");
+        }
+
+        // K posKey = pos.getElement().getKey()
+        // super.search(posKey);
+        /*
+        Node nodeEntry = super.validate(pos);
+        Node node = nodeEntry;
+        int lHeight = 1;
+        int rHeight = 1;
+        while (true){
+            if (node.getLeftChild() == null || node.getLeftChild().getElement() == null){
+                node = node.getLeftChild();
+                break;
+            }
+            lHeight++;
+        }
+        node = nodeEntry;
+        while (true){
+            if (node.getRightChild() == null || node.getRightChild().getElement() == null){
+                node = node.getRightChild();
+                break;
+            }
+            rHeight++;
+        }
+
+         */
+
+        return Math.max(height(left(pos)), height(right(pos)));
+    }
+
+    /**
+     * In cases that the height of the children of pos exceeds one, do one of the following:
+     * zig left, zig right, zig zag left, and zig zag right
+     * @param pos the position to be evaluated and, if possible, operated into
+     */
+    private void postprocess(Position<Entry<K, V>> pos) {
+
+    }
+
+    public boolean isBalanced(Position<Entry<K, V>> pos){
+        Math.abs(getHeight(left(pos) - ))
+        return false;
+    }
+
+    /**
+     * Inserts the key-value pair into the tree.
+     * If the entry with key k exists, return the old value and replace it with value v.
+     * @param key the key of the entry.
+     * @param value the value of the entry.
+     * @return the value of an entry, if entry with key k already exists.
+     */
+    @Override
+    protected V insert(K key, V value) {
+
+        super.insert(key, value);
+        Position<Entry<K, V>> pos = super.search(key);
+        postprocess(validate(pos).getParent());
+        //TODO return not modified yet
+        return value;
+    }
+
+    /**
+     * Removes the entry with key k.
+     * @param key the key of the entry to be removed.
+     * @return the value of the entry.
+     */
+    @Override
+    protected V remove(K key) {
+
+
+        return null;
+    }
+
+    public static void main(String[] args) {
+        MyAVL<Integer, String> tree;
+        tree = new MyAVL<>();
+
+        tree.insert(1, "One");
+        tree.insert(2, "Two");
+        tree.insert(3, "Three");
+        System.out.println("root height: " + tree.getHeight(tree.root()));
+//        Node<Entry<Integer, String>> root = (Node<Entry<Integer, String>>) tree.root();
+//        Position<Entry<Integer, String>> left = root.getLeftChild();
+//        Position<Entry<Integer, String>> right = root.getRightChild();
+//        System.out.println("Two: "+ root.getElement().getValue());
+//        System.out.println("One "+ left.getElement().getValue());
+//        System.out.println("Three"+ right.getElement().getValue());
+    }
+}
